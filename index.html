@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TSC 4~5급 완전 정복 실전 마스터 (청취·한자 집중 공략)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans KR"', 'sans-serif'],
+            sc: ['"Noto Sans SC"', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#1e1b4b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .font-sc {
+      font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+    .blur-mask {
+      filter: blur(8px);
+      user-select: none;
+      transition: filter 0.3s ease;
+    }
+    .blur-mask:hover {
+      filter: blur(4px);
+    }
+    .unmask {
+      filter: none !important;
+      user-select: auto !important;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f8fafc;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-indigo-100 selection:text-indigo-900">
+
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <!-- Title & Branding -->
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-blue-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 font-sc font-extrabold text-xl">
+          通
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">TSC 4~5급 청취·말하기 마스터</h1>
+            <span class="px-2 py-0.5 text-2xs font-bold rounded-full bg-rose-100 text-rose-700">기출 100% 반영</span>
+          </div>
+          <p class="text-xs text-slate-500">블라인드 청취 특훈 · 파트 2,4,7 정복 · 성어 스토리텔링</p>
+        </div>
+      </div>
+
+      <!-- Controls: Audio Rate, Audio Mute, Streak -->
+      <div class="flex items-center flex-wrap gap-2 text-xs sm:text-sm">
+        <div id="streakBadge" class="flex items-center bg-amber-50 text-amber-900 px-3 py-1.5 rounded-lg border border-amber-200 font-semibold shadow-2xs">
+          <span class="mr-1">🔥</span>
+          <span id="streakCount">1</span>일 연속 달성
+        </div>
+
+        <!-- TTS Speed Toggle -->
+        <div class="flex items-center bg-slate-100 rounded-lg p-1 border border-slate-200">
+          <span class="text-slate-500 px-1 text-2xs font-bold">배속</span>
+          <button id="speedSlowBtn" onclick="setSpeechRate(0.8)" class="px-2 py-0.5 rounded text-2xs font-medium hover:bg-white text-slate-600 transition" title="느리게 듣기">0.8x</button>
+          <button id="speedNormalBtn" onclick="setSpeechRate(1.0)" class="px-2 py-0.5 rounded text-2xs bg-white text-indigo-600 font-bold shadow-2xs transition" title="표준 속도">1.0x</button>
+          <button id="speedFastBtn" onclick="setSpeechRate(1.2)" class="px-2 py-0.5 rounded text-2xs font-medium hover:bg-white text-slate-600 transition" title="실전 고속 듣기">1.2x</button>
+        </div>
+
+        <!-- Sound Effects Toggle -->
+        <button id="audioMuteToggle" onclick="toggleMute()" title="타이머 신호음 켜기/끄기" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition">
+          <svg id="volIconOn" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+          <svg id="volIconOff" class="w-4 h-4 hidden text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-6xl mx-auto px-4 flex space-x-1 overflow-x-auto text-sm border-t border-slate-100">
+      <button onclick="switchTab('tab-daily')" id="btn-tab-daily" class="tab-btn px-4 py-2.5 font-bold border-b-2 border-indigo-600 text-indigo-600 whitespace-nowrap flex items-center gap-1.5">
+        <span>✨ 데일리 추천 훈련</span>
+      </button>
+      <button onclick="switchTab('tab-part2')" id="btn-tab-part2" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
+        <span>🎧 제2부분 기출 17선·듣기 속응</span>
+      </button>
+      <button onclick="switchTab('tab-part4')" id="btn-tab-part4" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
+        <span>⏱️ 제4부분 25초 실전 타이머</span>
+      </button>
+      <button onclick="switchTab('tab-part7')" id="btn-tab-part7" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
+        <span>📖 제7부분 만화 스토리 (샤오왕)</span>
+      </button>
+      <button onclick="switchTab('tab-dict')" id="btn-tab-dict" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
+        <span>🔍 의문사·식별 한자 52 도감</span>
+      </button>
+      <button onclick="switchTab('tab-saved')" id="btn-tab-saved" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap flex items-center gap-1.5">
+        <span>⭐ 오답 & 나만의 단어장</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-6xl w-full mx-auto px-4 py-6 flex-1">
+
+    <!-- TAB 1: 데일리 추천 학습 -->
+    <section id="tab-daily" class="tab-content block space-y-6">
+      
+      <!-- Banner Card -->
+      <div class="p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 text-2xs font-bold px-2.5 py-0.5 rounded-full bg-indigo-500/30 text-indigo-200 mb-1.5">
+            <span>🎯 3급 ➔ 4·5급 필승 전략</span>
+          </div>
+          <h2 class="text-base sm:text-lg font-bold text-white">듣기 불안 해소: 의문사 귀 뚫기 + 앵무새 첫마디 2초</h2>
+          <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
+            한자를 다 읽지 못해도 질문의 의문사(<strong class="text-amber-300">哪儿, 几点, 多少, 为什么, 还是</strong>)만 청취하면 답변을 80% 완성할 수 있습니다.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="switchTab('tab-part2')" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow-sm transition">
+            🎧 2부분 듣기 연습 바로가기
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Daily Tasks Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Task 1: 2부분 듣기 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-3 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-2xs font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800">청취 특훈 1순위</span>
+              <span class="text-xs text-slate-400">제2부분</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 mt-2">그림 보고 듣고 즉각 답변</h3>
+            <p class="text-xs text-slate-500 mt-1">장소(공항, 약국), 사물(농구공, 신문), 직업(가이드, 가수), 호수(1604호 幺) 기출 17문제 블라인드 청취</p>
+          </div>
+          <button onclick="switchTab('tab-part2')" class="w-full py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs transition">
+            17문항 듣기 훈련 시작
+          </button>
+        </div>
+
+        <!-- Task 2: 4부분 타이머 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-3 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-2xs font-bold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800">4~5급 분수령</span>
+              <span class="text-xs text-slate-400">제4부분</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 mt-2">15초 준비 ➔ 25초 발화 타이머</h3>
+            <p class="text-xs text-slate-500 mt-1">질문 앵무새 기법으로 2초 안에 시작하고, 4단 템플릿(결론-이유1-예시-마무리)으로 25초를 가득 채우세요.</p>
+          </div>
+          <button onclick="switchTab('tab-part4')" class="w-full py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs transition">
+            25초 실전 타이머 풀기
+          </button>
+        </div>
+
+        <!-- Task 3: 7부분 성어 스토리 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-3 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-2xs font-bold px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800">5급 초고득점</span>
+              <span class="text-xs text-slate-400">제7부분</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 mt-2">샤오왕(小王)의 카페 스토리</h3>
+            <p class="text-xs text-slate-500 mt-1">첫눈에 반함(一见钟情)부터 어안이 벙벙함(目瞪口呆)까지! 기본형과 고급 성어형 2가지 모범 답안 수록.</p>
+          </div>
+          <button onclick="switchTab('tab-part7')" class="w-full py-2 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold text-xs transition">
+            스토리텔링 마스터하기
+          </button>
+        </div>
+      </div>
+
+      <!-- Core Question Words Ear-Training Strip -->
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-extrabold text-slate-900 text-sm flex items-center gap-2">
+              <span>🎧 청취 즉답 핵심 의문사 9선 (소리 듣고 바로 뜻 떠올리기)</span>
+            </h3>
+            <p class="text-xs text-slate-500">버튼을 눌러 소리를 듣고, 귀에 익숙해질 때까지 반복해서 따라 하세요.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2 text-xs text-center">
+          <button onclick="speakChinese('哪儿')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 transition">
+            <div class="font-sc font-extrabold text-base text-slate-800">哪儿</div>
+            <div class="text-2xs text-indigo-600 font-semibold">nǎr</div>
+            <div class="text-2xs text-slate-500 mt-0.5">어디(장소)</div>
+          </button>
+          <button onclick="speakChinese('什么')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 transition">
+            <div class="font-sc font-extrabold text-base text-slate-800">什么</div>
+            <div class="text-2xs text-indigo-600 font-semibold">shénme</div>
+            <div class="text-2xs text-slate-500 mt-0.5">무엇(사물)</div>
+          </button>
+          <button onclick="speakChinese('谁')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 transition">
+            <div class="font-sc font-extrabold text-base text-slate-800">谁</div>
+            <div class="text-2xs text-indigo-600 font-semibold">shéi</div>
+            <div class="text-2xs text-slate-500 mt-0.5">누구(인물)</div>
+          </button>
+          <button onclick="speakChinese('几点')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 transition">
+            <div class="font-sc font-extrabold text-base text-slate-800">几点</div>
+            <div class="text-2xs text-indigo-600 font-semibold">jǐ diǎn</div>
+            <div class="text-2xs text-slate-500 mt-0.5">몇 시(시간)</div>
+          </button>
+          <button onclick="speakChinese('多少钱')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 transition">
+            <div class="font-sc font-extrabold text-base text-slate-800">多少钱</div>
+            <div class="text-2xs text-indigo-600 font-semibold">duōshao qián</div>
+            <div class="text-2xs text-slate-500 mt-0.5">얼마(가격)</div>
+          </button>
+          <button onclick="speakChinese('多大')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 transition">
+            <div class="font-sc font-extrabold text-base text-slate-800">多大</div>
+            <div class="text-2xs text-indigo-600 font-semibold">duō dà</div>
+            <div class="text-2xs text-slate-500 mt-0.5">몇 살(나이)</div>
+          </button>
+          <button onclick="speakChinese('几号')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 transition">
+            <div class="font-sc font-extrabold text-base text-slate-800">几号</div>
+            <div class="text-2xs text-indigo-600 font-semibold">jǐ hào</div>
+            <div class="text-2xs text-slate-500 mt-0.5">몇 호/몇 일</div>
+          </button>
+          <button onclick="speakChinese('为什么')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 transition">
+            <div class="font-sc font-extrabold text-base text-slate-800">为什么</div>
+            <div class="text-2xs text-indigo-600 font-semibold">wèishénme</div>
+            <div class="text-2xs text-slate-500 mt-0.5">왜(이유)</div>
+          </button>
+          <button onclick="speakChinese('还是')" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 transition">
+            <div class="font-sc font-extrabold text-base text-slate-800">还是</div>
+            <div class="text-2xs text-indigo-600 font-semibold">háishi</div>
+            <div class="text-2xs text-slate-500 mt-0.5">A 또는 B(선택)</div>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 2: 제2부분 기출 17선·듣기 속응 -->
+    <section id="tab-part2" class="tab-content hidden space-y-6">
+      
+      <!-- Part 2 Intro & Blind Mode Toggle -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200">
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="text-base font-extrabold text-slate-900">제2부분 그림 보고 듣고 답하기 (기출 17문항 완벽 수록)</h3>
+            <span class="text-2xs bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded-full">준비 3초 / 답변 6초</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-0.5">실제 시험처럼 질문이 화면에 안 나올 때를 대비해 <strong class="text-indigo-600">블라인드 청취 모드</strong>로 연습하세요.</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Category Filter -->
+          <select id="part2CatFilter" onchange="renderPart2List()" class="text-xs border border-slate-300 rounded-lg p-1.5 bg-slate-50 text-slate-700 font-semibold">
+            <option value="all">전체 유형 (17문항)</option>
+            <option value="location">1. 장소/위치</option>
+            <option value="item">2. 사물/위치</option>
+            <option value="job">3. 직업</option>
+            <option value="action">4. 동작/상태</option>
+            <option value="compare">5. 비교</option>
+            <option value="numbers">6. 시간/가격/나이/호수(YBM)</option>
+          </select>
+
+          <!-- Blind Listening Mode Toggle -->
+          <button onclick="toggleBlindMode()" id="blindModeBtn" class="px-3 py-1.5 rounded-lg border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold transition flex items-center gap-1">
+            <span>🙈 블라인드 듣기 ON</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Part 2 Timer Bar (Optional Quick 3s + 6s) -->
+      <div class="bg-indigo-900 text-white p-4 rounded-2xl flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-800 flex items-center justify-center font-bold text-lg text-amber-300">
+            <span id="part2TimerSeconds">6</span>s
+          </div>
+          <div>
+            <div class="text-xs font-bold text-indigo-200" id="part2TimerStatus">제2부분 속응 타이머 (준비 3초 ➔ 삐 ➔ 답변 6초)</div>
+            <div class="text-2xs text-slate-300" id="part2TimerSub">문제를 듣고 즉각 단답형 문장으로 말하는 연습을 해보세요.</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="startPart2Timer()" id="part2TimerBtn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold text-xs rounded-xl shadow-xs transition">
+            ▶ 타이머 시작
+          </button>
+          <button onclick="resetPart2Timer()" class="px-3 py-2 bg-indigo-800 hover:bg-indigo-700 text-white text-xs rounded-xl transition">
+            리셋
+          </button>
+        </div>
+      </div>
+
+      <!-- Part 2 Questions Container -->
+      <div id="part2ListContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </section>
+
+    <!-- TAB 3: 제4부분 25초 실전 타이머 -->
+    <section id="tab-part4" class="tab-content hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left Column: Question Browser (7 Cols) -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="bg-white rounded-2xl shadow-xs border border-slate-200 p-5 sm:p-6">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+              <div>
+                <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Part 4 Simulator</span>
+                <h3 class="font-extrabold text-slate-900 text-base">실전 기출 문제 선택 & 질문 청취</h3>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <select id="mockQuestionSelect" onchange="loadMockQuestion(this.value)" class="text-xs border border-slate-300 rounded-lg p-1.5 bg-slate-50 text-slate-700 font-medium focus:ring-2 focus:ring-indigo-500">
+                  <!-- Injected via JS -->
+                </select>
+              </div>
+            </div>
+
+            <!-- Exam Visual Box (Simulating Computer Screen) -->
+            <div class="bg-slate-900 text-white rounded-xl p-6 mb-4 text-center relative overflow-hidden shadow-inner">
+              <div class="text-2xs text-indigo-300 uppercase tracking-widest font-semibold mb-2">TSC 제4부분 (준비 15초 / 답변 25초)</div>
+              <!-- Prominent Hanzi Question Display -->
+              <div id="mockHanziDisplay" class="font-sc font-bold text-xl sm:text-2xl text-slate-50 leading-relaxed min-h-[60px] flex items-center justify-center">
+                你平时喜欢做什么运动？为什么？
+              </div>
+              <!-- TTS Speaker Button -->
+              <div class="mt-4 flex items-center justify-center gap-2">
+                <button onclick="playCurrentMockAudio()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-semibold shadow-md flex items-center gap-1.5 transition active:scale-95">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+                  <span>질문 음성 듣기</span>
+                </button>
+                <button onclick="toggleMockHint()" id="mockHintBtn" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 rounded-xl text-xs">
+                  병음/해석 힌트 보기
+                </button>
+              </div>
+            </div>
+
+            <!-- Hidden Hint (Pinyin + Korean) -->
+            <div id="mockSubHintBox" class="hidden p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1 mb-4">
+              <p class="font-sc text-indigo-600 font-medium" id="mockPinyinDisplay">Nǐ píngshí xǐhuan zuò shénme yùndòng? Wèishénme?</p>
+              <p class="text-slate-700 font-semibold" id="mockKoreanDisplay">"당신은 평소에 어떤 운동을 하는 것을 좋아합니까? 왜 그렇습니까?"</p>
+            </div>
+
+            <!-- Question Echo Quick Anchor -->
+            <div class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-200 space-y-2 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center">🦜</span>
+                <span class="text-xs font-bold text-indigo-900">2초 질문 앵무새 공식 (첫 문장 시작)</span>
+              </div>
+              <p id="mockEchoStarter" class="font-sc font-bold text-slate-900 text-sm bg-white p-2.5 rounded-lg border border-indigo-100">
+                我平时比较喜欢跑步。
+              </p>
+              <p class="text-2xs text-slate-500">질문의 你를 我로 바꾸고 의문사를 결론 단어로 대체하여 첫 문장을 2초 안에 바로 뱉으세요.</p>
+            </div>
+
+            <!-- 4-Step Model Script Preview -->
+            <div class="border border-slate-200 rounded-xl overflow-hidden">
+              <button onclick="toggleMockModelAnswer()" class="w-full px-4 py-3 bg-slate-50 hover:bg-slate-100 flex items-center justify-between text-xs font-bold text-slate-700">
+                <span>📑 4단 고득점 모범 답안 펼치기</span>
+                <span id="mockModelAnswerChevron">▼</span>
+              </button>
+              <div id="mockModelAnswerContent" class="hidden p-4 bg-white space-y-3 text-xs">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Real Timer (5 Cols) -->
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-2xl shadow-xs border border-slate-200 p-5 sm:p-6 sticky top-24">
+            <div class="text-center pb-3 border-b border-slate-100 mb-4">
+              <span class="text-xs font-extrabold text-rose-600 uppercase tracking-wider">Real Exam Timer</span>
+              <h3 class="font-extrabold text-slate-900 text-base">제4부분 실전 타이머</h3>
+              <p class="text-xs text-slate-500 mt-0.5">준비시간 15초 ➔ 삐- 소리 ➔ 답변 25초</p>
+            </div>
+
+            <!-- Circular Progress Timer -->
+            <div class="flex flex-col items-center justify-center py-4">
+              <div class="relative w-44 h-44 flex items-center justify-center">
+                <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="50" class="text-slate-100" stroke-width="8" stroke="currentColor" fill="transparent" />
+                  <circle id="tscTimerCircle" cx="60" cy="60" r="50" class="text-indigo-600 transition-all duration-200 ease-linear" stroke-width="8" stroke-dasharray="314.159" stroke-dashoffset="0" stroke-linecap="round" stroke="currentColor" fill="transparent" />
+                </svg>
+
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                  <span id="tscPhaseBadge" class="text-2xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 mb-1">대기 중</span>
+                  <span id="tscSecondsText" class="text-4xl font-extrabold text-slate-900 tabular-nums">25</span>
+                  <span class="text-2xs text-slate-400">초 남음</span>
+                </div>
+              </div>
+
+              <!-- Pacing Advice -->
+              <div id="tscPacingAdvice" class="mt-4 px-3 py-2 rounded-xl text-center text-xs font-medium bg-slate-100 text-slate-700 w-full transition-colors">
+                [시험 시작]을 누르면 15초 생각 시간 후 25초 발화 녹음이 진행됩니다.
+              </div>
+            </div>
+
+            <!-- Timer Action Buttons -->
+            <div class="flex items-center gap-2 mt-2">
+              <button id="tscTimerStartBtn" onclick="toggleTscTimer()" class="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white rounded-xl font-bold text-xs sm:text-sm shadow-md shadow-indigo-500/20 transition flex items-center justify-center gap-2">
+                <span id="tscTimerBtnIcon">▶</span>
+                <span id="tscTimerBtnText">실전 타이머 시작</span>
+              </button>
+              <button onclick="resetTscTimer()" class="p-3 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-600 transition" title="타이머 리셋">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              </button>
+            </div>
+
+            <!-- Simulated Mic indicator -->
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-2xs text-slate-500">
+              <span class="flex items-center gap-1.5">
+                <span id="micDot" class="w-2 h-2 rounded-full bg-slate-300"></span>
+                <span id="micLabel">마이크 대기</span>
+              </span>
+              <span>시험장 표준: 25초 (4~5문장 목표)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 4: 제7부분 만화 스토리 (샤오왕의 비련 이야기) -->
+    <section id="tab-part7" class="tab-content hidden space-y-6">
+      
+      <!-- Part 7 Header Card -->
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 font-bold text-2xs">제7부분 실전 기출</span>
+            <h3 class="font-extrabold text-slate-900 text-base">4컷 만화 스토리텔링: 샤오왕(小王)의 카페 데이트</h3>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">
+            길에서 번호를 딴 여성과 약속한 카페에 갔는데, 남편과 함께 나타나 당황한 이야기! (시험 안내: 준비 45초 / 답변 90초)
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Part 7 Timer Start Button -->
+          <button onclick="startPart7Timer()" id="part7TimerBtn" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs rounded-xl shadow-xs transition flex items-center gap-1">
+            <span>⏱️ 45초 준비 / 90초 타이머</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4-Cut Scene Illustration Summary -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="bg-white p-3 rounded-xl border border-slate-200 text-center space-y-1 shadow-2xs">
+          <div class="text-2xl">👀💘</div>
+          <div class="text-xs font-bold text-slate-800">1컷: 첫눈에 반함</div>
+          <div class="text-2xs text-purple-700 font-semibold font-sc">路上看到漂亮女士, 一见钟情</div>
+          <div class="text-2xs text-slate-400">길에서 아름다운 여성을 보고 반함</div>
+        </div>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 text-center space-y-1 shadow-2xs">
+          <div class="text-2xl">📱🤝</div>
+          <div class="text-xs font-bold text-slate-800">2컷: 번호 얻기 성공</div>
+          <div class="text-2xs text-purple-700 font-semibold font-sc">鼓起勇气, 要到电话号码</div>
+          <div class="text-2xs text-slate-400">용기 내 다가가 번호를 얻음</div>
+        </div>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 text-center space-y-1 shadow-2xs">
+          <div class="text-2xl">💐☕</div>
+          <div class="text-xs font-bold text-slate-800">3컷: 카페에서 대기</div>
+          <div class="text-2xs text-purple-700 font-semibold font-sc">拿着鲜花, 期待地等待</div>
+          <div class="text-2xs text-slate-400">꽃다발을 들고 기대하며 기다림</div>
+        </div>
+        <div class="bg-white p-3 rounded-xl border border-slate-200 text-center space-y-1 shadow-2xs">
+          <div class="text-2xl">😱💔</div>
+          <div class="text-xs font-bold text-slate-800">4컷: 남편 등장 & 당황</div>
+          <div class="text-2xs text-purple-700 font-semibold font-sc">挽着老公的手, 尴尬不已</div>
+          <div class="text-2xs text-slate-400">남편과 함께 와서 쥐구멍에 숨고 싶음</div>
+        </div>
+      </div>
+
+      <!-- Essential Idiom Flashcard Strip -->
+      <div class="bg-purple-50/70 border border-purple-200 rounded-2xl p-4 space-y-3">
+        <h4 class="text-xs font-bold text-purple-900 flex items-center gap-1.5">
+          <span>✨ 5급 도약 필수 성어 & 표현 카드 (클릭 시 원어민 발음 재생)</span>
+        </h4>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+          <button onclick="speakChinese('一见钟情')" class="p-2.5 bg-white rounded-xl border border-purple-100 hover:border-purple-300 text-left transition shadow-2xs">
+            <div class="font-sc font-bold text-slate-900">一见钟情 🔊</div>
+            <div class="text-2xs text-purple-600 font-sc">yíjiàn-zhōngqíng</div>
+            <div class="text-2xs text-slate-500">첫눈에 반하다</div>
+          </button>
+          <button onclick="speakChinese('鼓起勇气')" class="p-2.5 bg-white rounded-xl border border-purple-100 hover:border-purple-300 text-left transition shadow-2xs">
+            <div class="font-sc font-bold text-slate-900">鼓起勇气 🔊</div>
+            <div class="text-2xs text-purple-600 font-sc">gǔ qǐ yǒngqì</div>
+            <div class="text-2xs text-slate-500">용기를 내다</div>
+          </button>
+          <button onclick="speakChinese('万万没想到')" class="p-2.5 bg-white rounded-xl border border-purple-100 hover:border-purple-300 text-left transition shadow-2xs">
+            <div class="font-sc font-bold text-slate-900">万万没想到 🔊</div>
+            <div class="text-2xs text-purple-600 font-sc">wànwàn méi xiǎngdào</div>
+            <div class="text-2xs text-slate-500">전혀 생각지도 못했다</div>
+          </button>
+          <button onclick="speakChinese('目瞪口呆')" class="p-2.5 bg-white rounded-xl border border-purple-100 hover:border-purple-300 text-left transition shadow-2xs">
+            <div class="font-sc font-bold text-slate-900">目瞪口呆 🔊</div>
+            <div class="text-2xs text-purple-600 font-sc">mùdèng-kǒudāi</div>
+            <div class="text-2xs text-slate-500">어안이 벙벙하다</div>
+          </button>
+          <button onclick="speakChinese('无地自容')" class="p-2.5 bg-white rounded-xl border border-purple-100 hover:border-purple-300 text-left transition shadow-2xs">
+            <div class="font-sc font-bold text-slate-900">无地自容 🔊</div>
+            <div class="text-2xs text-purple-600 font-sc">wú dì zì róng</div>
+            <div class="text-2xs text-slate-500">부끄러워 쥐구멍에 들어가고 싶다</div>
+          </button>
+          <button onclick="speakChinese('上前搭讪')" class="p-2.5 bg-white rounded-xl border border-purple-100 hover:border-purple-300 text-left transition shadow-2xs">
+            <div class="font-sc font-bold text-slate-900">上前搭讪 🔊</div>
+            <div class="text-2xs text-purple-600 font-sc">shàngqián dāshàn</div>
+            <div class="text-2xs text-slate-500">다가가 말을 걸다(헌팅)</div>
+          </button>
+          <button onclick="speakChinese('狂喜不已')" class="p-2.5 bg-white rounded-xl border border-purple-100 hover:border-purple-300 text-left transition shadow-2xs">
+            <div class="font-sc font-bold text-slate-900">狂喜不已 🔊</div>
+            <div class="text-2xs text-purple-600 font-sc">kuángxǐ bùyǐ</div>
+            <div class="text-2xs text-slate-500">기쁨을 주체하지 못하다</div>
+          </button>
+          <button onclick="speakChinese('早已为人妻')" class="p-2.5 bg-white rounded-xl border border-purple-100 hover:border-purple-300 text-left transition shadow-2xs">
+            <div class="font-sc font-bold text-slate-900">早已为人妻 🔊</div>
+            <div class="text-2xs text-purple-600 font-sc">zǎoyǐ wéi rén qī</div>
+            <div class="text-2xs text-slate-500">이미 품절녀/유부녀이다</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Script Comparison: 答1 (Standard Level 4-5) vs 答2 (Advanced Level 5-6+) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Answer 1 (Standard) -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div>
+              <span class="px-2 py-0.5 text-2xs font-bold rounded-full bg-blue-100 text-blue-800">모범 답변 1 (4~5급 표준형)</span>
+              <h4 class="font-bold text-slate-900 text-sm mt-1">자연스럽고 안정적인 기본 스크립트</h4>
+            </div>
+            <button onclick="speakPart7('ans1')" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold shadow-xs flex items-center gap-1 transition">
+              🔊 전체 듣기
+            </button>
+          </div>
+
+          <div class="space-y-3 text-xs leading-relaxed" id="part7Script1">
+            <!-- Rendered by JS with clickable sentences -->
+          </div>
+        </div>
+
+        <!-- Answer 2 (Advanced) -->
+        <div class="bg-white p-5 rounded-2xl border border-purple-200 shadow-xs space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-purple-100">
+            <div>
+              <span class="px-2 py-0.5 text-2xs font-bold rounded-full bg-purple-100 text-purple-800">모범 답변 2 (5~6+급 성어 고득점형)</span>
+              <h4 class="font-bold text-slate-900 text-sm mt-1">고급 성어와 문학적 어휘가 가미된 스크립트</h4>
+            </div>
+            <button onclick="speakPart7('ans2')" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-bold shadow-xs flex items-center gap-1 transition">
+              🔊 전체 듣기
+            </button>
+          </div>
+
+          <div class="space-y-3 text-xs leading-relaxed" id="part7Script2">
+            <!-- Rendered by JS with clickable sentences -->
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TAB 5: 필수 식별 한자 52선 도감 -->
+    <section id="tab-dict" class="tab-content hidden space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200">
+        <div>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+            <span>제4부분 필수 식별 한자 52선 도감</span>
+            <span id="dictCountBadge" class="text-xs bg-indigo-100 text-indigo-700 px-2.5 py-0.5 rounded-full font-bold">52개 등록</span>
+          </h3>
+          <p class="text-xs text-slate-500">검색 또는 카테고리 필터로 한자의 모양과 즉각 답변 공식을 훈련하세요.</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 text-xs">
+          <!-- Search Input -->
+          <input type="text" id="dictSearchInput" oninput="renderDictCards()" placeholder="한자/의미 검색..." class="px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 focus:ring-2 focus:ring-indigo-500">
+          
+          <!-- Category Filter -->
+          <select id="dictCategorySelect" onchange="renderDictCards()" class="px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 font-medium">
+            <option value="all">전체 유형</option>
+            <option value="question">의문사·핵심 질문어</option>
+            <option value="opinion">생각·판단</option>
+            <option value="stance">찬반·평가</option>
+            <option value="frequency">시간·빈도</option>
+            <option value="theme">빈출 테마 키워드</option>
+          </select>
+
+          <!-- Toggle Pinyin Globally -->
+          <button onclick="toggleDictPinyin()" id="dictPinyinToggleBtn" class="px-3 py-1.5 rounded-lg border border-slate-300 bg-slate-50 hover:bg-slate-100 font-semibold text-slate-700">
+            병음 가리기
+          </button>
+        </div>
+      </div>
+
+      <!-- Dictionary Grid -->
+      <div id="dictGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- TAB 6: 북마크 & 나만의 단어장 -->
+    <section id="tab-saved" class="tab-content hidden space-y-6">
+      
+      <!-- Top Actions -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200">
+        <div>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+            <span>북마크 단어장 및 나만의 어휘 등록</span>
+          </h3>
+          <p class="text-xs text-slate-500">헷갈리는 한자를 별표(⭐)하여 모아보고, 교재나 기출에서 새로 본 단어를 직접 추가하세요.</p>
+        </div>
+
+        <button onclick="openAddWordModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-xs flex items-center gap-1.5">
+          <span>➕ 나만의 한자/어휘 추가</span>
+        </button>
+      </div>
+
+      <!-- Bookmarked Hanzi List -->
+      <div>
+        <h4 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-1.5">
+          <span>⭐ 즐겨찾기 / 헷갈리는 한자 모아보기</span>
+          <span id="bookmarkCount" class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">0개</span>
+        </h4>
+        <div id="bookmarkedGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- User Custom Added Words -->
+      <div class="pt-4 border-t border-slate-200">
+        <h4 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-1.5">
+          <span>📝 내가 직접 등록한 단어장</span>
+          <span id="customWordsCount" class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full font-bold">0개</span>
+        </h4>
+        <div id="customWordsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Modal: Add Custom Word / Phrase -->
+  <div id="addWordModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <h3 class="font-extrabold text-slate-900 text-base">새로운 한자 / 표현 등록</h3>
+        <button onclick="closeAddWordModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">한자 (간체자) *</label>
+          <input type="text" id="customInputHanzi" placeholder="예: 保护环境" class="w-full p-2.5 rounded-xl border border-slate-300 font-sc font-bold text-base focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">한어병음</label>
+          <input type="text" id="customInputPinyin" placeholder="예: bǎohù huánjìng" class="w-full p-2.5 rounded-xl border border-slate-300 font-sc focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">한국어 뜻 *</label>
+          <input type="text" id="customInputMeaning" placeholder="예: 환경을 보호하다" class="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">즉각 답변 시작 공식 / 팁</label>
+          <input type="text" id="customInputStarter" placeholder="예: 为了保护环境，我建议..." class="w-full p-2.5 rounded-xl border border-slate-300 font-sc focus:ring-2 focus:ring-indigo-500">
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeAddWordModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-600 text-xs font-semibold hover:bg-slate-50">
+          취소
+        </button>
+        <button onclick="saveCustomWord()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-xs">
+          저장하기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <script>
+    /* Global Application State */
+    let speechRate = 1.0;
+    let isMuted = false;
+    let isBlindMode = true; // Blind listening mode by default for intensive listening
+    let dictPinyinVisible = true;
+
+    // LocalStorage Keys
+    const LS_STREAK = 'tsc_master_streak';
+    const LS_BOOKMARKS = 'tsc_master_bookmarks';
+    const LS_CUSTOM_WORDS = 'tsc_master_custom_words';
+
+    let bookmarkedIds = new Set(JSON.parse(localStorage.getItem(LS_BOOKMARKS) || '[]'));
+    let customWords = JSON.parse(localStorage.getItem(LS_CUSTOM_WORDS) || '[]');
+
+    // Audio Context Setup
+    let audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, duration = 0.12, type = 'sine') {
+      if (isMuted) return;
+      try {
+        const ctx = getAudioCtx();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {
+        console.warn('Audio tone err:', e);
+      }
+    }
+
+    function playBeepChime() {
+      if (isMuted) return;
+      playTone(523.25, 0.08); // C5
+      setTimeout(() => playTone(659.25, 0.08), 80); // E5
+      setTimeout(() => playTone(880, 0.2), 160); // A5
+    }
+
+    function playAlertBuzzer() {
+      if (isMuted) return;
+      playTone(220, 0.25, 'sawtooth');
+    }
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      document.getElementById('volIconOn').classList.toggle('hidden', isMuted);
+      document.getElementById('volIconOff').classList.toggle('hidden', !isMuted);
+      showToast(isMuted ? '음향 신호음 음소거됨' : '신호음 켜짐');
+    }
+
+    function setSpeechRate(rate) {
+      speechRate = rate;
+      ['0.8', '1.0', '1.2'].forEach(r => {
+        const btn = document.getElementById(r === '0.8' ? 'speedSlowBtn' : r === '1.0' ? 'speedNormalBtn' : 'speedFastBtn');
+        if (parseFloat(r) === rate) {
+          btn.className = 'px-2 py-0.5 rounded text-2xs bg-white text-indigo-600 font-bold shadow-2xs transition';
+        } else {
+          btn.className = 'px-2 py-0.5 rounded text-2xs font-medium hover:bg-white text-slate-600 transition';
+        }
+      });
+      showToast(`중국어 음성 속도: ${rate}x`);
+    }
+
+    function speakChinese(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast('브라우저가 음성 합성(TTS)을 지원하지 않습니다.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'zh-CN';
+      utterance.rate = speechRate;
+      
+      const voices = window.speechSynthesis.getVoices();
+      const zhVoice = voices.find(v => v.lang === 'zh-CN' || v.lang.startsWith('zh'));
+      if (zhVoice) utterance.voice = zhVoice;
+      
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function showToast(msg) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'pointer-events-auto bg-slate-900/95 text-white text-xs px-4 py-2.5 rounded-xl shadow-lg border border-slate-700 transition-all duration-300 transform translate-y-2 opacity-0 flex items-center space-x-2';
+      toast.innerHTML = `<span>💬</span><span>${msg}</span>`;
+      container.appendChild(toast);
+      
+      requestAnimationFrame(() => toast.classList.remove('translate-y-2', 'opacity-0'));
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 2500);
+    }
+
+    /* Part 2 Captured Questions Dataset (from user's Hackers & YBM screenshots) */
+    const PART2_DATA = [
+      // 1. 장소/위치 문제 (KakaoTalk_20260901_220537474.jpg)
+      {
+        id: 'p2_1',
+        category: 'location',
+        typeText: '장소/위치',
+        icon: '✈️',
+        scene: '공항 탑승 게이트(GATE)와 비행기 앞을 지나가는 여성',
+        question: '她去哪儿？',
+        pinyin: 'Tā qù nǎr?',
+        korean: '그녀는 어디에 갑니까?',
+        answer: '她去机场。',
+        ansPinyin: 'Tā qù jīchǎng.',
+        ansKorean: '그녀는 공항에 갑니다.',
+        keyVocab: '机场 (jīchǎng) 공항 / 哪儿 (nǎr) 어디',
+        tip: '의문사 哪儿 자리에 장소 단어 [机场]을 그대로 넣어 대답합니다.'
+      },
+      {
+        id: 'p2_2',
+        category: 'location',
+        typeText: '장소/위치',
+        icon: '💊🌳',
+        scene: '약국(십자가 간판) 바로 옆에 위치한 공원',
+        question: '公园在哪儿？',
+        pinyin: 'Gōngyuán zài nǎr?',
+        korean: '공원은 어디에 있습니까?',
+        answer: '公园在药店旁边。',
+        ansPinyin: 'Gōngyuán zài yàodiàn pángbiān.',
+        ansKorean: '공원은 약국 옆에 있습니다.',
+        keyVocab: '药店 (yàodiàn) 약국 / 旁边 (pángbiān) 옆',
+        tip: '~在哪儿 질문에는 [A在 B旁边] (A는 B 옆에 있다) 구조로 대응합니다.'
+      },
+
+      // 2. 사물/위치 문제 (KakaoTalk_20260901_220537474_01.jpg)
+      {
+        id: 'p2_3',
+        category: 'item',
+        typeText: '사물/위치',
+        icon: '🏀',
+        scene: '책상 아래에 놓여 있는 농구공',
+        question: '桌子下边有什么东西？',
+        pinyin: 'Zhuōzi xiàbian yǒu shénme dōngxi?',
+        korean: '책상 아래에는 무슨 물건이 있습니까?',
+        answer: '桌子下边有篮球。',
+        ansPinyin: 'Zhuōzi xiàbian yǒu lánqiú.',
+        ansKorean: '책상 아래쪽에는 농구공이 있습니다.',
+        keyVocab: '桌子 (zhuōzi) 책상 / 下边 (xiàbian) 아래 / 篮球 (lánqiú) 농구공',
+        tip: '什么东西 자리에 사물 단어 [篮球]만 쏙 넣으면 100점입니다.'
+      },
+      {
+        id: 'p2_4',
+        category: 'item',
+        typeText: '사물/위치',
+        icon: '📰⌚',
+        scene: '테이블 위에 놓인 신문(왼쪽)과 손목시계(오른쪽)',
+        question: '左边的是什么？',
+        pinyin: 'Zuǒbian de shì shénme?',
+        korean: '왼쪽의 것은 무엇입니까?',
+        answer: '左边的是报纸。',
+        ansPinyin: 'Zuǒbian de shì bàozhǐ.',
+        ansKorean: '왼쪽의 것은 신문입니다.',
+        keyVocab: '左边 (zuǒbian) 왼쪽 / 报纸 (bàozhǐ) 신문',
+        tip: '방향어 左边(왼쪽), 右边(오른쪽)을 구분하여 [是 ~]로 답합니다.'
+      },
+
+      // 3. 직업 문제 (KakaoTalk_20260901_220537474_02.jpg)
+      {
+        id: 'p2_5',
+        category: 'job',
+        typeText: '직업',
+        icon: '🎤',
+        scene: '무대 위 조명을 받으며 드레스를 입고 노래하는 여성',
+        question: '她是谁？',
+        pinyin: 'Tā shì shéi?',
+        korean: '그녀는 누구입니까?',
+        answer: '她是歌手。',
+        ansPinyin: 'Tā shì gēshǒu.',
+        ansKorean: '그녀는 가수입니다.',
+        keyVocab: '谁 (shéi) 누구 / 歌手 (gēshǒu) 가수',
+        tip: '是谁 ➔ [是 + 직업명(歌手)]으로 즉각 대응하세요.'
+      },
+      {
+        id: 'p2_6',
+        category: 'job',
+        typeText: '직업',
+        icon: '🚩🗺️',
+        scene: '깃발을 들고 헤드셋을 낀 채 관광객을 인솔하는 남자',
+        question: '男的是做什么工作的？',
+        pinyin: 'Nánde shì zuò shénme gōngzuò de?',
+        korean: '남자는 무슨 일을 하는 사람입니까?',
+        answer: '男的是导游。',
+        ansPinyin: 'Nánde shì dǎoyóu.',
+        ansKorean: '남자는 여행 가이드입니다.',
+        keyVocab: '做什么工作的 (무슨 일 하는 사람) / 导游 (dǎoyóu) 여행 가이드',
+        tip: '做什么工作 질문은 [男的是 ~]로 직업명(导游)만 덧붙여 마무리합니다.'
+      },
+
+      // 4. 동작/상태 문제 (KakaoTalk_20260901_220537474_03.jpg & 04.jpg)
+      {
+        id: 'p2_7',
+        category: 'action',
+        typeText: '동작/상태',
+        icon: '📚❌🥤',
+        scene: '도서관 책상에서 책을 펼쳐보고 있는 남녀 (음료수는 없음)',
+        question: '他们在喝饮料吗？',
+        pinyin: 'Tāmen zài hē yǐnliào ma?',
+        korean: '그들은 음료를 마시고 있습니까?',
+        answer: '他们在看书。',
+        ansPinyin: 'Tāmen zài kàn shū.',
+        ansKorean: '그들은 책을 보고 있습니다.',
+        keyVocab: '喝饮料 (hē yǐnliào) 음료를 마시다 / 看书 (kàn shū) 책을 보다',
+        tip: '질문의 동작이 틀릴 때는 정답 동작 [他们在看书]로 바로 고쳐 말합니다.'
+      },
+      {
+        id: 'p2_8',
+        category: 'action',
+        typeText: '동작/상태',
+        icon: '🎳🕒',
+        scene: '시계가 3:00를 가리키고 볼링공을 던지는 남자',
+        question: '他下午三点做什么？',
+        pinyin: 'Tā xiàwǔ sān diǎn zuò shénme?',
+        korean: '그는 오후 3시에 무엇을 합니까?',
+        answer: '他下午三点打保龄球。',
+        ansPinyin: 'Tā xiàwǔ sān diǎn dǎ bǎolíngqiú.',
+        ansKorean: '그는 오후 3시에 볼링을 칩니다.',
+        keyVocab: '下午 (xiàwǔ) 오후 / 点 (diǎn) 시 / 打保龄球 (dǎ bǎolíngqiú) 볼링 치다',
+        tip: '시간어 뒤에 做什么 대신 구체적인 동작 [打保龄球]를 결합합니다.'
+      },
+      {
+        id: 'p2_9',
+        category: 'action',
+        typeText: '동작/상태',
+        icon: '🚫🍔📖',
+        scene: '서점 서가 벽면에 음식물 섭취 금지 표지판',
+        question: '书店里不可以做什么？',
+        pinyin: 'Shūdiàn lǐ bù kěyǐ zuò shénme?',
+        korean: '서점 안에서 무엇을 하면 안 됩니까?',
+        answer: '书店里不可以吃东西。',
+        ansPinyin: 'Shūdiàn lǐ bù kěyǐ chī dōngxi.',
+        ansKorean: '서점 안에서 음식을 먹으면 안 됩니다.',
+        keyVocab: '不可以 (bù kěyǐ) ~하면 안 된다 / 吃东西 (chī dōngxi) 음식을 먹다',
+        tip: '不可以 뒤에 금지된 행동 [吃东西]를 넣어 완성합니다.'
+      },
+      {
+        id: 'p2_10',
+        category: 'action',
+        typeText: '동작/상태',
+        icon: '☀️🏖️',
+        scene: '작열하는 태양 아래 파라솔과 바다에서 튜브를 타고 수영하는 모습',
+        question: '现在是秋天吗？',
+        pinyin: 'Xiànzài shì qiūtiān ma?',
+        korean: '지금은 가을입니까?',
+        answer: '现在是夏天。',
+        ansPinyin: 'Xiànzài shì xiàtiān.',
+        ansKorean: '지금은 여름입니다.',
+        keyVocab: '秋天 (qiūtiān) 가을 / 夏天 (xiàtiān) 여름',
+        tip: '계절 확인 의문문에 올바른 계절 단어 [夏天]으로 즉답합니다.'
+      },
+      {
+        id: 'p2_11',
+        category: 'action',
+        typeText: '동작/상태',
+        icon: '🚪🔒',
+        scene: '손잡이가 달린 문이 꽉 닫혀 있는 복도',
+        question: '门开着吗？',
+        pinyin: 'Mén kāizhe ma?',
+        korean: '문은 열려 있습니까?',
+        answer: '门关着。',
+        ansPinyin: 'Mén guānzhe.',
+        ansKorean: '문은 닫혀 있습니다.',
+        keyVocab: '开 (kāi) 열다 / 关 (guān) 닫다 / 着 (zhe) ~한 상태이다',
+        tip: '지속을 나타내는 着 문형: 开着(열려있다)의 반대는 [关着(닫혀있다)]입니다.'
+      },
+
+      // 5. 비교 문제 (KakaoTalk_20260901_220537474_05.jpg)
+      {
+        id: 'p2_12',
+        category: 'compare',
+        typeText: '비교',
+        icon: '📏🧍‍♀️🧍‍♂️',
+        scene: '여자의 키가 남자의 키보다 더 크게 그려진 비교 그림',
+        question: '谁的个子比较高？',
+        pinyin: 'Shéi de gèzi bǐjiào gāo?',
+        korean: '누구의 키가 비교적 큽니까?',
+        answer: '女生的个子比较高。',
+        ansPinyin: 'Nǚshēng de gèzi bǐjiào gāo.',
+        ansKorean: '여자의 키가 비교적 큽니다.',
+        keyVocab: '个子 (gèzi) 키 / 比较 (bǐjiào) 비교적 / 高 (gāo) 크다, 높다',
+        tip: '谁(누구) 자리에 [女生的]를 넣어 문장을 그대로 이어받습니다.'
+      },
+      {
+        id: 'p2_13',
+        category: 'compare',
+        typeText: '비교',
+        icon: '🧳⚖️',
+        scene: '여자의 캐리어 25kg, 남자의 캐리어 21kg 표시',
+        question: '男的的行李更重吗？',
+        pinyin: 'Nánde de xíngli gèng zhòng ma?',
+        korean: '남자의 짐이 더 무겁습니까?',
+        answer: '女的的行李更重。',
+        ansPinyin: 'Nǚde de xíngli gèng zhòng.',
+        ansKorean: '여자의 짐이 더 무겁습니다.',
+        keyVocab: '行李 (xíngli) 짐, 수하물 / 更 (gèng) 더욱 / 重 (zhòng) 무겁다',
+        tip: '25kg vs 21kg 수치를 비교하여 더 무거운 쪽 [女的的]으로 주어를 바꿉니다.'
+      },
+
+      // 6. YBM 기출 숫자/시간/가격/나이/호수 (KakaoTalk_20260901_220628907.png)
+      {
+        id: 'p2_14',
+        category: 'numbers',
+        typeText: '시간/출근',
+        icon: '⏰🏢',
+        scene: '시계가 7시 50분을 가리키며 출근하는 남자의 모습',
+        question: '他几点上班？',
+        pinyin: 'Tā jǐ diǎn shàngbān?',
+        korean: '그는 몇 시에 출근합니까?',
+        answer: '他七点五十分上班。',
+        ansPinyin: 'Tā qī diǎn wǔshí fēn shàngbān.',
+        ansKorean: '그는 7시 50분에 출근합니다.',
+        keyVocab: '几点 (jǐ diǎn) 몇 시 / 上班 (shàngbān) 출근하다',
+        tip: '几点 자리에 [七点五十分] (또는 差十分八点)을 넣습니다.'
+      },
+      {
+        id: 'p2_15',
+        category: 'numbers',
+        typeText: '가격/서적',
+        icon: '📚💵',
+        scene: '책 표지에 가격표 [24원 / 24元]이 적혀 있는 그림',
+        question: '这本书多少钱？',
+        pinyin: 'Zhè běn shū duōshao qián?',
+        korean: '이 책은 얼마입니까?',
+        answer: '这本书二十四块。',
+        ansPinyin: 'Zhè běn shū èrshísì kuài.',
+        ansKorean: '이 책은 24위안입니다.',
+        keyVocab: '多少钱 (duōshao qián) 얼마 / 块 (kuài) 원(구어 화폐 단위)',
+        tip: '회화에서는 元(yuán) 대신 구어체인 [块(kuài)]를 쓰는 것이 더 자연스럽습니다.'
+      },
+      {
+        id: 'p2_16',
+        category: 'numbers',
+        typeText: '나이/가족',
+        icon: '👦🎂',
+        scene: '15세 남동생이 그려져 있는 그림',
+        question: '弟弟今年多大？',
+        pinyin: 'Dìdi jīnnián duō dà?',
+        korean: '남동생은 올해 몇 살입니까?',
+        answer: '弟弟今年十五岁。',
+        ansPinyin: 'Dìdi jīnnián shíwǔ suì.',
+        ansKorean: '남동생은 올해 15세입니다.',
+        keyVocab: '多大 (duō dà) 몇 살 / 岁 (suì) 세, 살',
+        tip: '多大 질문에는 숫자 뒤에 단위 [岁(suì)]를 꼭 붙여야 합니다.'
+      },
+      {
+        id: 'p2_17',
+        category: 'numbers',
+        typeText: '호수(핵심 함정!)',
+        icon: '🚪🔢',
+        scene: '여자가 1604호 현관문에서 나오는 모습',
+        question: '她住几号？',
+        pinyin: 'Tā zhù jǐ hào?',
+        korean: '그녀는 몇 호에 삽니까?',
+        answer: '她住幺六零四。',
+        ansPinyin: 'Tā zhù yāo liù líng sì.',
+        ansKorean: '그녀는 1604호에 삽니다.',
+        keyVocab: '几号 (jǐ hào) 몇 호 / 幺 (yāo) 숫자 1의 호수/전화번호 구어 발음',
+        tip: '★초빈출 함정: 방 번호, 전화번호 등 일련번호의 숫자 1(一)은 [yāo(幺)]로 읽어야 감점이 없습니다!'
+      }
+    ];
+
+    /* Part 7 Captured Storytelling Scripts (Xiao Wang's Cafe Romance) */
+    const PART7_DATA = {
+      title: '샤오왕(小王)의 카페 비련 데이트',
+      summary: '길에서 아름다운 여성에게 첫눈에 반해 번호를 따고 기대하며 꽃을 사갔으나, 남편과 함께 나타나 크게 낭패를 본 4컷 스토리',
+      ans1: {
+        title: '답변 1: 4~5급 표준형 (자연스러운 기본 표현)',
+        sentences: [
+          {
+            zh: '有一天，小王在路上看到一位非常漂亮的女士，对他一见钟情。',
+            py: 'Yǒu yì tiān, Xiǎo Wáng zài lùshang kàn dào yí wèi fēicháng piàoliang de nǚshì, duì tā yíjiàn-zhōngqíng.',
+            kr: '어느 날, 샤오왕은 길에서 매우 아름다운 한 여성을 보았고, 그녀에게 첫눈에 반했습니다.'
+          },
+          {
+            zh: '小王鼓起勇气走过去，向那位女士要了电话号码，高兴地得到了。',
+            py: 'Xiǎo Wáng gǔ qǐ yǒngqì zǒu guòqù, xiàng nà wèi nǚshì yào le diànhuà hàomǎ, gāoxìng de dédào le.',
+            kr: '샤오왕은 용기를 내어 다가가 그 여성에게 전화번호를 물어보았고, 기쁘게 번호를 얻었습니다.'
+          },
+          {
+            zh: '第二天，小王拿着一束漂亮的鲜花，在约好的咖啡馆很期待地等待她。',
+            py: 'Dì-èr tiān, Xiǎo Wáng ná zhe yí shù piàoliang de xiānhuā, zài yuè hǎo de kāfēiguǎn hěn qīdài de děngdài tā.',
+            kr: '다음 날, 샤오왕은 예쁜 꽃다발을 들고 약속한 카페에서 매우 기대하며 그녀를 기다렸습니다.'
+          },
+          {
+            zh: '没想到，那位女士是和她的老公一起来的。小王才知道她已经结婚了，感到非常尴尬。',
+            py: 'Méi xiǎngdào, nà wèi nǚshì shì hé tā de lǎogōng yìqǐ lái de. Xiǎo Wáng cái zhīdào tā yǐjīng jiéhūn le, gǎndào fēicháng gāngà.',
+            kr: '뜻밖에, 그 여성은 남편과 함께 나타났습니다. 샤오왕은 그제야 그녀가 이미 결혼했다는 것을 알고 매우 당황했습니다.'
+          }
+        ]
+      },
+      ans2: {
+        title: '답변 2: 5~6+급 고득점형 (고급 사자성어 가미)',
+        sentences: [
+          {
+            zh: '有一天，小王在街上偶然遇到了一位气质高雅的女士，顿时对她一见钟情。',
+            py: 'Yǒu yì tiān, Xiǎo Wáng zài jiē shàng ǒurán yù dào le yí wèi qìzhì gāoyǎ de nǚshì, dùnshí duì tā yíjiàn-zhōngqíng.',
+            kr: '어느 날, 샤오왕은 길에서 우연히 우아한 기품을 가진 한 여성을 만났고, 순간 그녀에게 첫눈에 반했습니다.'
+          },
+          {
+            zh: '小王犹豫再三后鼓起勇气上前搭讪，顺利地要到了对方的手机号码，心里狂喜不已。',
+            py: 'Xiǎo Wáng yóuyù zàisān hòu gǔ qǐ yǒngqì shàngqián dāshàn, shùnlì de yào dào le duìfāng de shǒujī hàomǎ, xīn lǐ kuángxǐ bùyǐ.',
+            kr: '샤오왕은 몇 번을 망설이다 용기를 내어 다가가 말을 걸었고, 차질 없이 그녀의 핸드폰 번호를 얻어 마음속으로 기쁨을 주체하지 못했습니다.'
+          },
+          {
+            zh: '到了约定的日子，小王特意买了一束精致的鲜花，怀着无比激动的心情在餐厅静静地等待。',
+            py: 'Dào le yuèdìng de rìzi, Xiǎo Wáng tèyì mǎi le yí shù jīngzhì de xiānhuā, huái zhe wúbǐ jīdòng de xīnqíng zài cāntīng jìngjìng de děngdài.',
+            kr: '약속한 날이 되자, 샤오왕은 일부러 정교한 꽃다발을 하나 사서 비할 데 없이 설레는 마음으로 레스토랑에서 조용히 기다렸습니다.'
+          },
+          {
+            zh: '然而万万没想到的是，那位女士竟然挽着她老公的手一起走进了餐厅。得知对方早已为人妻，小王顿时目瞪口呆，尴尬得无地自容。',
+            py: 'Rán\'ér wànwàn méi xiǎngdào de shì, nà wèi nǚshì jìngrán wǎn zhe tā lǎogōng de shǒu yìqǐ zǒu jìn le cāntīng. Dézhī duìfāng zǎoyǐ wéi rén qī, Xiǎo Wáng dùnshí mùdèng-kǒudāi, gāngà de wú dì zì róng.',
+            kr: '그러나 전혀 예상치 못하게도, 그 여성은 뜻밖에도 남편의 팔짱을 끼고 함께 레스토랑으로 들어왔습니다. 상대방이 이미 품절녀라는 사실을 알게 된 샤오왕은 순간 어안이 벙벙해졌고, 쥐구멍에라도 들어가고 싶을 만큼 당황스러웠습니다.'
+          }
+        ]
+      }
+    };
+
+    /* Part 4 High Yield Simulation Questions */
+    const QUESTIONS_POOL = [
+      {
+        id: 1,
+        question: "你平时为什么喜欢用智能手机？",
+        pinyin: "Nǐ píngshí wèishénme xǐhuan yòng zhìnéng shǒujī?",
+        korean: "당신은 평소에 왜 스마트폰 쓰는 것을 좋아합니까?",
+        echoStarter: "我平时非常喜欢用智能手机。",
+        modelZh: "我平时非常喜欢用智能手机。说到智能手机，我觉得在现代生活中不可缺少。因为用手机不但可以联系朋友，而且还能查资料、看电影和购物。随时随地都能解决很多问题，非常节省时间。所以我觉得智能手机给我们的生活带来了极大的方便。",
+        modelPy: "Wǒ píngshí fēicháng xǐhuan yòng zhìnéng shǒujī. Shuō dào zhìnéng shǒujī, wǒ juéde zài xiàndài shēnghuó zhōng bùkě quēshǎo. Yīnwèi yòng shǒujī búdàn kěyǐ liánxì péngyou, érqiě hái néng chá zīliào, kàn diànyǐng hé gòuwù. Suíshí-suídì dōu néng jiějué hěn duō wèntí, fēicháng jiésheng shíjiān. Suǒyǐ wǒ juéde zhìnéng shǒujī gěi wǒmen de shēnghuó dàilái le jídà de fāngbiàn.",
+        modelKr: "저는 평소 스마트폰 사용하는 것을 아주 좋아합니다. 스마트폰에 대해 말하자면, 현대 생활에서 없어서는 안 된다고 생각합니다. 왜냐하면 휴대폰으로 친구와 연락할 수 있을 뿐 아니라, 자료 검색, 영화 감상, 쇼핑도 할 수 있기 때문입니다. 언제 어디서나 많은 문제를 해결할 수 있어 시간이 크게 절약됩니다. 그래서 저는 스마트폰이 우리 생활에 매우 큰 편리를 가져다주었다고 생각합니다."
+      },
+      {
+        id: 2,
+        question: "你喜欢去电影院看电影，还是在家里看电影？",
+        pinyin: "Nǐ xǐhuan qù diànyǐngyuàn kàn diànyǐng, háishi zài jiālǐ kàn diànyǐng?",
+        korean: "영화관에 가서 영화 보는 것을 좋아합니까, 아니면 집에서 보는 것을 좋아합니까?",
+        echoStarter: "相比之下，我更喜欢去电影院看电影。",
+        modelZh: "相比之下，我更喜欢去电影院看电影。因为电影院的屏幕非常大，音响效果也特别震撼，让人身临其境。而且周末的时候，和朋友一起吃着爆米花看新上映的大片，感觉很开心。所以虽然在家里看方便，但我还是更喜欢去电影院。",
+        modelPy: "Xiāngbǐ zhīxià, wǒ gèng xǐhuan qù diànyǐngyuàn kàn diànyǐng. Yīnwèi diànyǐngyuàn de píngmù fēicháng dà, yīnxiǎng xiàoguǒ yě tèbié zhènhàn, ràng rén shēnlín-qíjìng. Érqiě zhōumò de shíhou, hé péngyou yìqǐ chī zhe bàomǐhuā kàn xīn shàngyìng de dàpiān, gǎnjué hěn kāixīn. Suǒyǐ suīrán zài jiālǐ kàn fāngbiàn, dàn wǒ háishi gèng xǐhuan qù diànyǐngyuàn.",
+        modelKr: "비교해보자면 저는 영화관에 가서 영화 보는 것을 더 좋아합니다. 왜냐하면 영화관은 스크린이 매우 크고 음향 효과도 엄청나서 몰입감이 뛰어나기 때문입니다. 게다가 주말에 친구와 함께 팝콘을 먹으며 새로 개봉한 대작을 보면 기분이 아주 좋습니다. 집에서 보는 것이 편리하긴 하지만, 저는 영화관에 가는 쪽을 더 선호합니다."
+      },
+      {
+        id: 3,
+        question: "你觉得现代人应该怎样减轻压力？",
+        pinyin: "Nǐ juéde xiàndàirén yīnggāi zěnyàng jiǎnqīng yālì?",
+        korean: "현대인은 어떻게 스트레스를 줄여야 한다고 생각합니까?",
+        echoStarter: "我觉得现代人减轻压力最好的方法就是做运动和听音乐。",
+        modelZh: "我觉得现代人减轻压力最好的方法就是做运动和听音乐。平时工作特别忙，压力大的时候，跑步出了汗，心情就会变好。另外，周末约几个好朋友一起去吃美食、聊聊天，也是很好的减压方式。所以学会合理调节心情，对身心健康是非常重要的。",
+        modelPy: "Wǒ juéde xiàndàirén jiǎnqīng yālì zuì hǎo de fāngfǎ jiùshì zuò yùndòng hé tīng yīnyuè. Píngshí gōngzuò tèbié máng, yālì dà de shíhou, pǎobù chū le hàn, xīnqíng jiù huì biàn hǎo. Lìngwài, zhōumò yuē jǐ ge hǎo péngyou yìqǐ qù chī měishí, liáoliao tiān, yě shì hěn hǎo de jiǎnyā fāngshì. Suǒyǐ xuéhuì hélǐ tiáojié xīnqíng, duì shēnxīn jiànkāng shì fēicháng zhòngyào de.",
+        modelKr: "제가 생각하기에 현대인이 스트레스를 줄이는 가장 좋은 방법은 운동과 음악 듣기입니다. 평소 업무가 매우 바쁘고 스트레스가 클 때, 달리고 땀을 흘리면 기분이 좋아집니다. 또한 주말에 친한 친구들과 맛있는 음식을 먹으며 수다를 떠는 것도 좋은 해소법입니다. 그러므로 마음을 합리적으로 조절하는 것은 심신 건강에 매우 중요합니다."
+      },
+      {
+        id: 4,
+        question: "你认为一个人旅行好，还是和朋友一起旅行好？",
+        pinyin: "Nǐ rènwéi yí ge rén lǚxíng hǎo, háishi hé péngyou yìqǐ lǚxíng hǎo?",
+        korean: "혼자 여행하는 것이 좋다고 생각합니까, 아니면 친구와 함께 여행하는 것이 좋습니까?",
+        echoStarter: "我认为和朋友一起旅行更好。",
+        modelZh: "我认为和朋友一起旅行更好。因为旅行的路上有很多有趣的事情，两个人一起可以拍照、聊天，分享快乐。而且遇到困难或者迷路的时候，大家能够互相照顾，也更加安全。所以我觉得和朋友一起旅行更有意义，回忆也更美好。",
+        modelPy: "Wǒ rènwéi hé péngyou yìqǐ lǚxíng gèng hǎo. Yīnwèi lǚxíng de lùshang yǒu hěn duō yǒuqù de shìqing, liǎng ge rén yìqǐ kěyǐ pāizhào, liáotiān, fēnxiǎng kuàilè. Érqiě yù dào kùnnan huòzhě mílù de shíhou, dàjiā nénggòu hùxiāng zhàogù, yě gèngjiā ānquán. Suǒyǐ wǒ juéde hé péngyou yìqǐ lǚxíng gèng yǒu yìyì, huíyì yě gèng měihǎo.",
+        modelKr: "저는 친구와 함께 여행하는 것이 더 좋다고 생각합니다. 왜냐하면 여행길에는 재미있는 일들이 많은데, 함께 사진을 찍고 이야기를 나누며 즐거움을 나눌 수 있기 때문입니다. 또한 어려움에 부딪히거나 길을 잃었을 때도 서로 도울 수 있어 훨씬 안전합니다. 그래서 친구와의 여행이 더욱 뜻깊고 추억도 아름답다고 생각합니다."
+      },
+      {
+        id: 5,
+        question: "你每次锻炼身体大概多长时间？",
+        pinyin: "Nǐ měicì duànliàn shēntǐ dàgài duō cháng shíjiān?",
+        korean: "매번 운동할 때 보통 시간은 얼마나 걸립니까?",
+        echoStarter: "我每次锻炼身体大概一个小时左右。",
+        modelZh: "我每次锻炼身体大概一个小时左右。我通常先慢跑二十分钟热身，然后再做一些力量训练和拉伸运动。一个小时的时间刚刚好，既能达到锻炼出汗的效果，又不会觉得太累。每周坚持锻炼三次，我的体力和精力都比以前好多了。",
+        modelPy: "Wǒ měicì duànliàn shēntǐ dàgài yí ge xiǎoshí zuǒyòu. Wǒ tōngcháng xiān mànpǎo èrshí fēnzhōng rèshēn, ránhòu zài zuò yìxiē lìliang xùnliàn hé lāshēn yùndòng. Yí ge xiǎoshí de shíjiān zhāngzhāng hǎo, jì néng dádào duànliàn chū hàn de xiàoguǒ, yòu bú huì juéde tài lèi. Měi zhōu jiānchí duànliàn sān cì, wǒ de tǐlì hé jīnglì dōu bǐ yǐqián hǎo duō le.",
+        modelKr: "저는 매번 운동할 때 대략 1시간 정도 합니다. 보통 20분 동안 가볍게 조깅하며 준비운동을 하고, 이후 근력 운동과 스트레칭을 진행합니다. 1시간은 땀을 내며 운동 효과를 보기에 딱 알맞고 지나치게 피곤하지도 않습니다. 매주 3번씩 꾸준히 하니 체력과 활력이 예전보다 훨씬 좋아졌습니다."
+      }
+    ];
+
+    /* 52 High-Yield Essential Hanzi Pool */
+    const HANZI_POOL = [
+      { id: 1, category: 'question', hanzi: '为什么', pinyin: 'wèishénme', meaning: '왜, 어째서', cue: '이유 묻기', starter: '因为 ~，所以我...', tip: '가장 흔한 질문! 첫마디로 무조건 因为를 뱉으세요.' },
+      { id: 2, category: 'question', hanzi: '还是', pinyin: 'háishi', meaning: 'A 아니면 B (선택)', cue: '선택형', starter: '相比之下，我更喜欢 [A]...', tip: 'A와 B 중 자신 있는 단어 A를 즉각 고르세요.' },
+      { id: 3, category: 'question', hanzi: '哪儿', pinyin: 'nǎr', meaning: '어디', cue: '장소 묻기', starter: '在 [장소]...', tip: '2부분 빈출! 공원, 공항, 도서관 등 장소를 답하세요.' },
+      { id: 4, category: 'question', hanzi: '几点', pinyin: 'jǐ diǎn', meaning: '몇 시', cue: '시간 묻기', starter: '在 [시간] 点...', tip: '출퇴근 시간 질문에 분(分)까지 정확히 붙입니다.' },
+      { id: 5, category: 'question', hanzi: '多少钱', pinyin: 'duōshao qián', meaning: '얼마', cue: '가격 묻기', starter: '[숫자] 块钱...', tip: '구어체 块를 써서 대답하세요.' },
+      { id: 6, category: 'question', hanzi: '多大', pinyin: 'duō dà', meaning: '몇 살', cue: '나이 묻기', starter: '今年 [숫자] 岁...', tip: '나이 단위 岁를 빠뜨리지 마세요.' },
+      { id: 7, category: 'question', hanzi: '几号', pinyin: 'jǐ hào', meaning: '몇 호/몇 일', cue: '호수/날짜', starter: '住 [숫자] 号...', tip: '방 번호 1은 꼭 [yāo]로 발음합니다.' },
+      { id: 8, category: 'opinion', hanzi: '觉得', pinyin: 'juéde', meaning: '~라고 생각하다', cue: '내 생각 묻기', starter: '我觉得挺好的...', tip: '질문의 觉得를 我觉得로 그대로 받아치세요.' },
+      { id: 9, category: 'opinion', hanzi: '认为', pinyin: 'rènwéi', meaning: '~라고 여기다', cue: '견해 묻기', starter: '我认为...', tip: '觉得보다 격식 있는 의견 제시어입니다.' },
+      { id: 10, category: 'stance', hanzi: '赞成', pinyin: 'zànchéng', meaning: '찬성하다', cue: '찬반 묻기', starter: '我非常赞成...', tip: '찬성/반대 중 말하기 쉬운 쪽을 택1 하세요.' },
+      { id: 11, category: 'stance', hanzi: '好处', pinyin: 'hǎochu', meaning: '장점, 좋은 점', cue: '장점 묻기', starter: '有很多好处，第一 ~，第二 ~...', tip: '好处가 보이면 이유 2개를 나열하세요.' },
+      { id: 12, category: 'frequency', hanzi: '平时', pinyin: 'píngshí', meaning: '평소에', cue: '평소 행동', starter: '我平时喜欢...', tip: '질문의 平时를 我平时로 그대로 복사하세요.' },
+      { id: 13, category: 'theme', hanzi: '压力', pinyin: 'yālì', meaning: '스트레스, 부담', cue: '스트레스', starter: '现代人的工作压力都很大...', tip: '스트레스 해소 템플릿(운동, 음악)으로 연결.' },
+      { id: 14, category: 'theme', hanzi: '健康', pinyin: 'jiànkāng', meaning: '건강, 건강하다', cue: '건강 관리', starter: '为了保持健康，我每天...', tip: '러닝과 집밥 식습관으로 연결하세요.' },
+      { id: 15, category: 'theme', hanzi: '锻炼', pinyin: 'duànliàn', meaning: '단련하다, 운동하다', cue: '체력 단련', starter: '锻炼身体非常重要...', tip: '운동(跑步, 健身) 만능 스크립트 연결.' }
+    ];
+
+    function renderPart2List() {
+      const container = document.getElementById('part2ListContainer');
+      const cat = document.getElementById('part2CatFilter').value;
+      container.innerHTML = '';
+
+      const filtered = PART2_DATA.filter(item => cat === 'all' || item.category === cat);
+
+      filtered.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl border border-slate-200 p-5 shadow-2xs space-y-3 flex flex-col justify-between';
+
+        card.innerHTML = `
+          <div>
+            <!-- Header: Category & Sound Actions -->
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center font-bold text-xs">${idx + 1}</span>
+                <span class="text-2xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">${item.typeText}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="speakChinese('${item.question.replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold transition flex items-center gap-1">
+                  <span>🔊 질문 듣기</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Visual Cue Description -->
+            <div class="mt-2 p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-2.5">
+              <span class="text-xl">${item.icon}</span>
+              <div class="text-xs text-slate-600 font-medium">
+                <span class="font-bold text-slate-800">[화면 그림]</span> ${item.scene}
+              </div>
+            </div>
+
+            <!-- Question Box (With Blind Listening Blur Effect) -->
+            <div class="mt-3 p-3 rounded-xl bg-slate-900 text-white relative group">
+              <div class="flex items-center justify-between text-2xs text-indigo-300 font-semibold mb-1">
+                <span>질문 음원 청취</span>
+                <button onclick="revealPart2Question('p2_q_${item.id}')" class="text-indigo-400 hover:text-white underline">
+                  질문 텍스트 보기
+                </button>
+              </div>
+              
+              <div id="p2_q_${item.id}" class="${isBlindMode ? 'blur-mask' : 'unmask'} transition">
+                <div class="font-sc font-bold text-base sm:text-lg text-white">${item.question}</div>
+                <div class="font-sc text-indigo-300 text-xs mt-0.5">${item.pinyin}</div>
+                <div class="text-slate-300 text-xs font-normal mt-0.5">"${item.korean}"</div>
+              </div>
+            </div>
+
+            <!-- Quick Answer Accordion -->
+            <div class="mt-3 p-3 rounded-xl bg-indigo-50/60 border border-indigo-100 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-2xs font-extrabold text-indigo-900">⚡ 모범 답변 (6초 발화)</span>
+                <button onclick="speakChinese('${item.answer.replace(/'/g, "\\'")}')" class="text-indigo-700 hover:text-indigo-900 text-2xs font-bold flex items-center gap-0.5">
+                  <span>🔊 정답 듣기</span>
+                </button>
+              </div>
+              <div class="font-sc font-extrabold text-indigo-950 text-sm bg-white p-2 rounded-lg border border-indigo-100">
+                ${item.answer}
+              </div>
+              <div class="text-2xs text-indigo-700 font-sc">${item.ansPinyin}</div>
+              <div class="text-2xs text-slate-600">"${item.ansKorean}"</div>
+            </div>
+          </div>
+
+          <!-- Bottom Vocab & Tip -->
+          <div class="pt-2 border-t border-slate-100 text-2xs space-y-1 text-slate-500">
+            <div><strong class="text-slate-700">핵심 단어:</strong> ${item.keyVocab}</div>
+            <div class="text-indigo-600 font-medium">💡 ${item.tip}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleBlindMode() {
+      isBlindMode = !isBlindMode;
+      const btn = document.getElementById('blindModeBtn');
+      if (isBlindMode) {
+        btn.innerHTML = '<span>🙈 블라인드 듣기 ON</span>';
+        btn.className = 'px-3 py-1.5 rounded-lg border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold transition flex items-center gap-1';
+        showToast('블라인드 모드 ON: 질문 텍스트가 블러 처리되어 귀로 먼저 듣는 연습을 합니다.');
+      } else {
+        btn.innerHTML = '<span>👀 전체 텍스트 보이기</span>';
+        btn.className = 'px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold transition flex items-center gap-1';
+        showToast('모든 질문 텍스트가 공개되었습니다.');
+      }
+      renderPart2List();
+    }
+
+    function revealPart2Question(elementId) {
+      const el = document.getElementById(elementId);
+      if (el) {
+        el.classList.remove('blur-mask');
+        el.classList.add('unmask');
+      }
+    }
+
+    /* Part 2 Quick Timer (3s Prep -> 6s Speak) */
+    let part2TimerInterval = null;
+    let part2State = 'idle'; // 'idle' | 'prep' | 'speak'
+    let part2Seconds = 6;
+
+    function startPart2Timer() {
+      getAudioCtx();
+      clearInterval(part2TimerInterval);
+      part2State = 'prep';
+      part2Seconds = 3;
+      updatePart2TimerUI();
+      playTone(550, 0.1);
+
+      part2TimerInterval = setInterval(() => {
+        part2Seconds--;
+        updatePart2TimerUI();
+
+        if (part2Seconds <= 0) {
+          if (part2State === 'prep') {
+            part2State = 'speak';
+            part2Seconds = 6;
+            playBeepChime();
+            updatePart2TimerUI();
+          } else {
+            clearInterval(part2TimerInterval);
+            part2State = 'idle';
+            playAlertBuzzer();
+            showToast('⏰ 제2부분 답변 시간(6초)이 종료되었습니다.');
+            updatePart2TimerUI();
+          }
+        }
+      }, 1000);
+    }
+
+    function resetPart2Timer() {
+      clearInterval(part2TimerInterval);
+      part2State = 'idle';
+      part2Seconds = 6;
+      updatePart2TimerUI();
+    }
+
+    function updatePart2TimerUI() {
+      const secEl = document.getElementById('part2TimerSeconds');
+      const statusEl = document.getElementById('part2TimerStatus');
+      const subEl = document.getElementById('part2TimerSub');
+      const btn = document.getElementById('part2TimerBtn');
+
+      secEl.innerText = part2Seconds;
+
+      if (part2State === 'idle') {
+        statusEl.innerText = '제2부분 속응 타이머 (준비 3초 ➔ 삐 ➔ 답변 6초)';
+        subEl.innerText = '문제를 듣고 즉각 단답형 문장으로 말하는 연습을 해보세요.';
+        btn.innerText = '▶ 타이머 시작';
+      } else if (part2State === 'prep') {
+        statusEl.innerText = '🧠 준비 시간 (3초) - 머릿속으로 의문사 치환!';
+        subEl.innerText = '카운트다운 후 삐 소리와 함께 바로 말하세요.';
+        btn.innerText = '⏹ 중지';
+      } else if (part2State === 'speak') {
+        statusEl.innerText = '🎙️ 녹음 중 (6초) - 완벽한 단문 1문장 발화!';
+        subEl.innerText = '주어 + 술어 + 목적어를 빠뜨리지 마세요.';
+        btn.innerText = '⏹ 중지';
+      }
+    }
+
+    function renderPart7Scripts() {
+      const s1Container = document.getElementById('part7Script1');
+      const s2Container = document.getElementById('part7Script2');
+      s1Container.innerHTML = '';
+      s2Container.innerHTML = '';
+
+      // Answer 1
+      PART7_DATA.ans1.sentences.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'p-3 rounded-xl bg-slate-50 border border-slate-100 hover:border-blue-200 transition space-y-1 cursor-pointer';
+        div.onclick = () => speakChinese(item.zh);
+        div.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-2xs">[${idx + 1}번째 문장] 🔊 클릭하여 듣기</span>
+          </div>
+          <div class="font-sc font-bold text-slate-900 text-sm">${item.zh}</div>
+          <div class="font-sc text-blue-600 text-2xs">${item.py}</div>
+          <div class="text-slate-600 text-xs">${item.kr}</div>
+        `;
+        s1Container.appendChild(div);
+      });
+
+      // Answer 2
+      PART7_DATA.ans2.sentences.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'p-3 rounded-xl bg-purple-50/40 border border-purple-100 hover:border-purple-300 transition space-y-1 cursor-pointer';
+        div.onclick = () => speakChinese(item.zh);
+        div.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-purple-700 text-2xs">[${idx + 1}번째 문장] 🔊 클릭하여 듣기</span>
+          </div>
+          <div class="font-sc font-bold text-slate-900 text-sm">${item.zh}</div>
+          <div class="font-sc text-purple-600 text-2xs">${item.py}</div>
+          <div class="text-slate-600 text-xs">${item.kr}</div>
+        `;
+        s2Container.appendChild(div);
+      });
+    }
+
+    function speakPart7(type) {
+      const data = type === 'ans1' ? PART7_DATA.ans1 : PART7_DATA.ans2;
+      const fullText = data.sentences.map(s => s.zh).join(' ');
+      speakChinese(fullText);
+      showToast(`${data.title} 전체 음성을 재생합니다.`);
+    }
+
+    /* Part 7 Real Timer (45s Prep -> 90s Speech) */
+    let part7TimerInterval = null;
+    let part7State = 'idle'; // 'idle' | 'prep' | 'speak'
+    let part7Seconds = 45;
+
+    function startPart7Timer() {
+      getAudioCtx();
+      if (part7State !== 'idle') {
+        clearInterval(part7TimerInterval);
+        part7State = 'idle';
+        document.getElementById('part7TimerBtn').innerText = '⏱️ 45초 준비 / 90초 타이머';
+        showToast('제7부분 타이머가 리셋되었습니다.');
+        return;
+      }
+
+      part7State = 'prep';
+      part7Seconds = 45;
+      playTone(550, 0.1);
+      document.getElementById('part7TimerBtn').innerText = `생각 시간: ${part7Seconds}초 남음 (클릭 시 중단)`;
+
+      part7TimerInterval = setInterval(() => {
+        part7Seconds--;
+        if (part7State === 'prep') {
+          document.getElementById('part7TimerBtn').innerText = `생각 시간: ${part7Seconds}초 남음 (중단)`;
+          if (part7Seconds <= 0) {
+            part7State = 'speak';
+            part7Seconds = 90;
+            playBeepChime();
+            showToast('🎙️ 90초 발화가 시작되었습니다! 4컷 스토리를 끝까지 말하세요.');
+          }
+        } else if (part7State === 'speak') {
+          document.getElementById('part7TimerBtn').innerText = `🎙️ 답변 시간: ${part7Seconds}초 남음 (중단)`;
+          if (part7Seconds <= 0) {
+            clearInterval(part7TimerInterval);
+            part7State = 'idle';
+            playAlertBuzzer();
+            document.getElementById('part7TimerBtn').innerText = '⏱️ 45초 준비 / 90초 타이머';
+            showToast('⏰ 90초 답변 시간이 종료되었습니다!');
+          }
+        }
+      }, 1000);
+    }
+
+    /* Part 4 Simulator Engine */
+    let currentMockIdx = 0;
+    let mockHintVisible = false;
+    let mockAnswerExpanded = false;
+
+    function initMockSelectOptions() {
+      const select = document.getElementById('mockQuestionSelect');
+      select.innerHTML = '';
+      QUESTIONS_POOL.forEach((q, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.innerText = `문제 ${idx + 1}. ${q.question.substring(0, 16)}...`;
+        select.appendChild(opt);
+      });
+    }
+
+    function loadMockQuestion(idx) {
+      currentMockIdx = parseInt(idx, 10);
+      const q = QUESTIONS_POOL[currentMockIdx];
+
+      document.getElementById('mockHanziDisplay').innerText = q.question;
+      document.getElementById('mockPinyinDisplay').innerText = q.pinyin;
+      document.getElementById('mockKoreanDisplay').innerText = `"${q.korean}"`;
+      document.getElementById('mockEchoStarter').innerText = q.echoStarter;
+
+      mockHintVisible = false;
+      document.getElementById('mockSubHintBox').classList.add('hidden');
+      document.getElementById('mockHintBtn').innerText = '병음/해석 힌트 보기';
+
+      const content = document.getElementById('mockModelAnswerContent');
+      content.innerHTML = `
+        <div class="space-y-2">
+          <p class="font-sc font-bold text-slate-800 text-sm">${q.modelZh}</p>
+          <p class="font-sc text-indigo-600 text-xs">${q.modelPy}</p>
+          <p class="text-slate-600 text-xs">${q.modelKr}</p>
+          <div class="pt-2">
+            <button onclick="speakChinese('${q.modelZh.replace(/'/g, "\\'")}')" class="px-3 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded-lg text-2xs">
+              🔊 모범답안 음성 듣기
+            </button>
+          </div>
+        </div>
+      `;
+
+      resetTscTimer();
+    }
+
+    function playCurrentMockAudio() {
+      const q = QUESTIONS_POOL[currentMockIdx];
+      speakChinese(q.question);
+    }
+
+    function toggleMockHint() {
+      mockHintVisible = !mockHintVisible;
+      document.getElementById('mockSubHintBox').classList.toggle('hidden', !mockHintVisible);
+      document.getElementById('mockHintBtn').innerText = mockHintVisible ? '힌트 숨기기' : '병음/해석 힌트 보기';
+    }
+
+    function toggleMockModelAnswer() {
+      mockAnswerExpanded = !mockAnswerExpanded;
+      document.getElementById('mockModelAnswerContent').classList.toggle('hidden', !mockAnswerExpanded);
+      document.getElementById('mockModelAnswerChevron').innerText = mockAnswerExpanded ? '▲' : '▼';
+    }
+
+    /* Part 4 Official Exam Timer Engine (15s prep -> 25s speaking) */
+    let tscTimerState = 'idle';
+    let tscTimerInterval = null;
+    const PREP_SECONDS = 15;
+    const SPEAK_SECONDS = 25;
+    let tscSecondsRemaining = 25;
+
+    function toggleTscTimer() {
+      getAudioCtx();
+      if (tscTimerState === 'idle') {
+        startTscPreparation();
+      } else {
+        resetTscTimer();
+      }
+    }
+
+    function startTscPreparation() {
+      tscTimerState = 'prep';
+      tscSecondsRemaining = PREP_SECONDS;
+      updateTscTimerDisplay();
+
+      document.getElementById('tscTimerBtnText').innerText = '타이머 중지';
+      document.getElementById('tscTimerBtnIcon').innerText = '⏹';
+
+      playTone(600, 0.1);
+
+      clearInterval(tscTimerInterval);
+      tscTimerInterval = setInterval(() => {
+        tscSecondsRemaining--;
+        updateTscTimerDisplay();
+
+        if (tscSecondsRemaining <= 3 && tscSecondsRemaining > 0) {
+          playTone(450, 0.08);
+        }
+
+        if (tscSecondsRemaining <= 0) {
+          clearInterval(tscTimerInterval);
+          startTscSpeaking();
+        }
+      }, 1000);
+    }
+
+    function startTscSpeaking() {
+      tscTimerState = 'speak';
+      tscSecondsRemaining = SPEAK_SECONDS;
+
+      playTone(880, 0.5, 'sine');
+      setTimeout(() => playTone(880, 0.35, 'sine'), 160);
+
+      updateTscTimerDisplay();
+
+      clearInterval(tscTimerInterval);
+      tscTimerInterval = setInterval(() => {
+        tscSecondsRemaining--;
+        updateTscTimerDisplay();
+
+        if (tscSecondsRemaining === 5) {
+          playTone(440, 0.15, 'sawtooth');
+        }
+
+        if (tscSecondsRemaining <= 0) {
+          clearInterval(tscTimerInterval);
+          finishTscTimer();
+        }
+      }, 1000);
+    }
+
+    function finishTscTimer() {
+      tscTimerState = 'idle';
+      playAlertBuzzer();
+      showToast('⏰ 25초 답변 시간이 종료되었습니다!');
+      updateTscTimerDisplay();
+      
+      document.getElementById('tscTimerBtnText').innerText = '다시 연습하기';
+      document.getElementById('tscTimerBtnIcon').innerText = '▶';
+    }
+
+    function resetTscTimer() {
+      clearInterval(tscTimerInterval);
+      tscTimerState = 'idle';
+      tscSecondsRemaining = SPEAK_SECONDS;
+      updateTscTimerDisplay();
+
+      document.getElementById('tscTimerBtnText').innerText = '실전 타이머 시작';
+      document.getElementById('tscTimerBtnIcon').innerText = '▶';
+    }
+
+    function updateTscTimerDisplay() {
+      const circle = document.getElementById('tscTimerCircle');
+      const secondsText = document.getElementById('tscSecondsText');
+      const badge = document.getElementById('tscPhaseBadge');
+      const advice = document.getElementById('tscPacingAdvice');
+      const micDot = document.getElementById('micDot');
+      const micLabel = document.getElementById('micLabel');
+
+      secondsText.innerText = tscSecondsRemaining;
+      const circumference = 314.159;
+
+      if (tscTimerState === 'idle') {
+        circle.style.strokeDashoffset = '0';
+        circle.className = 'text-indigo-600 transition-all duration-200 ease-linear';
+        badge.innerText = '대기 중';
+        badge.className = 'text-2xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 mb-1';
+        advice.innerText = '[시험 시작]을 누르면 15초 생각 시간 후 25초 녹음이 시작됩니다.';
+        advice.className = 'mt-4 px-3 py-2 rounded-xl text-center text-xs font-medium bg-slate-100 text-slate-700 w-full';
+        micDot.className = 'w-2 h-2 rounded-full bg-slate-300';
+        micLabel.innerText = '마이크 대기';
+      } else if (tscTimerState === 'prep') {
+        const offset = circumference * (1 - tscSecondsRemaining / PREP_SECONDS);
+        circle.style.strokeDashoffset = offset;
+        circle.className = 'text-amber-500 transition-all duration-200 ease-linear';
+        badge.innerText = '생각 시간 (15초)';
+        badge.className = 'text-2xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 mb-1';
+        advice.innerHTML = '🧠 <b>의문사 캐치!</b> 질문의 你를 我로 바꾸는 첫마디를 준비하세요.';
+        advice.className = 'mt-4 px-3 py-2 rounded-xl text-center text-xs font-semibold bg-amber-50 text-amber-900 border border-amber-200 w-full';
+        micDot.className = 'w-2 h-2 rounded-full bg-amber-400 animate-pulse';
+        micLabel.innerText = '준비 중...';
+      } else if (tscTimerState === 'speak') {
+        const offset = circumference * (1 - tscSecondsRemaining / SPEAK_SECONDS);
+        circle.style.strokeDashoffset = offset;
+        badge.innerText = '🎙️ 녹음 중!';
+        badge.className = 'text-2xs font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 animate-pulse mb-1';
+        micDot.className = 'w-2 h-2 rounded-full bg-rose-600 animate-ping';
+        micLabel.innerText = '녹음 진행 중';
+
+        const elapsed = SPEAK_SECONDS - tscSecondsRemaining;
+        if (elapsed <= 5) {
+          circle.className = 'text-blue-600 transition-all duration-200 ease-linear';
+          advice.innerHTML = '<b>[0~5초]</b> 질문 앵무새로 첫 문장 결론 발화!';
+        } else if (elapsed <= 13) {
+          circle.className = 'text-indigo-600 transition-all duration-200 ease-linear';
+          advice.innerHTML = '<b>[5~13초]</b> 不但 ~ 而且 ~ 로 이유1 설명!';
+        } else if (elapsed <= 20) {
+          circle.className = 'text-emerald-600 transition-all duration-200 ease-linear';
+          advice.innerHTML = '<b>[13~20초]</b> 구체적 경험/예시 덧붙이기!';
+        } else {
+          circle.className = 'text-rose-600 transition-all duration-200 ease-linear';
+          advice.innerHTML = '<b>[20~25초]</b> 所以我觉得~로 마무리 요약!';
+        }
+      }
+    }
+
+    function renderDictCards() {
+      const container = document.getElementById('dictGrid');
+      const search = document.getElementById('dictSearchInput').value.trim().toLowerCase();
+      const cat = document.getElementById('dictCategorySelect').value;
+      container.innerHTML = '';
+
+      let list = HANZI_POOL.filter(item => {
+        const matchCat = cat === 'all' || item.category === cat;
+        const matchSearch = !search || item.hanzi.includes(search) || item.meaning.includes(search) || item.pinyin.toLowerCase().includes(search);
+        return matchCat && matchSearch;
+      });
+
+      document.getElementById('dictCountBadge').innerText = `${list.length} / ${HANZI_POOL.length}개`;
+
+      list.forEach(item => {
+        const isBookmarked = bookmarkedIds.has(item.id);
+
+        const card = document.createElement('div');
+        card.className = `p-4 rounded-xl border bg-white shadow-2xs hover:shadow-sm transition flex flex-col justify-between ${
+          isBookmarked ? 'border-amber-300 ring-1 ring-amber-200' : 'border-slate-200'
+        }`;
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-2xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                ${item.cue}
+              </span>
+              <button onclick="toggleBookmark(${item.id}, event)" class="p-1 text-slate-400 hover:text-amber-500 transition">
+                <svg class="w-4 h-4 ${isBookmarked ? 'text-amber-500 fill-amber-400' : 'stroke-current fill-none'}" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="font-sc font-extrabold text-2xl text-slate-900 tracking-wide">${item.hanzi}</span>
+              <button onclick="speakChinese('${item.hanzi}')" class="p-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs transition">
+                🔊
+              </button>
+            </div>
+
+            <p class="dict-pinyin text-xs font-semibold text-indigo-600 font-sc mb-0.5 ${dictPinyinVisible ? '' : 'hidden'}">${item.pinyin}</p>
+            <p class="text-xs font-bold text-slate-800 mb-2">${item.meaning}</p>
+
+            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-100 text-xs">
+              <span class="text-2xs font-bold text-slate-400 block mb-0.5">⚡ 첫마디 공식:</span>
+              <span class="font-sc font-medium text-slate-900 text-xs">${item.starter}</span>
+            </div>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-slate-100 text-2xs text-slate-400">
+            💡 ${item.tip}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleDictPinyin() {
+      dictPinyinVisible = !dictPinyinVisible;
+      document.getElementById('dictPinyinToggleBtn').innerText = dictPinyinVisible ? '병음 가리기' : '병음 보이기';
+      renderDictCards();
+    }
+
+    function toggleBookmark(id, event) {
+      if (event) event.stopPropagation();
+      if (bookmarkedIds.has(id)) {
+        bookmarkedIds.delete(id);
+        showToast('북마크가 해제되었습니다.');
+      } else {
+        bookmarkedIds.add(id);
+        playTone(700, 0.1);
+        showToast('⭐ 북마크에 추가되었습니다.');
+      }
+      localStorage.setItem(LS_BOOKMARKS, JSON.stringify(Array.from(bookmarkedIds)));
+      renderDictCards();
+      renderSavedTab();
+    }
+
+    function renderSavedTab() {
+      const bookmarkedContainer = document.getElementById('bookmarkedGrid');
+      const customContainer = document.getElementById('customWordsGrid');
+      bookmarkedContainer.innerHTML = '';
+      customContainer.innerHTML = '';
+
+      const bookmarkedItems = HANZI_POOL.filter(item => bookmarkedIds.has(item.id));
+      document.getElementById('bookmarkCount').innerText = `${bookmarkedItems.length}개`;
+
+      if (bookmarkedItems.length === 0) {
+        bookmarkedContainer.innerHTML = `
+          <div class="col-span-full p-6 text-center text-xs text-slate-400 border border-dashed border-slate-200 rounded-xl bg-slate-50">
+            아직 북마크된 항목이 없습니다. 도감에서 별(⭐)을 눌러 추가하세요.
+          </div>
+        `;
+      } else {
+        bookmarkedItems.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'p-4 rounded-xl border border-amber-200 bg-amber-50/20 shadow-2xs flex flex-col justify-between';
+          card.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-sc font-extrabold text-2xl text-slate-900">${item.hanzi}</span>
+                <button onclick="toggleBookmark(${item.id}, event)" class="text-amber-500 hover:text-amber-600 p-1" title="북마크 해제">
+                  <svg class="w-4 h-4 fill-amber-400" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                </button>
+              </div>
+              <p class="text-xs text-indigo-600 font-sc font-semibold mb-0.5">${item.pinyin}</p>
+              <p class="text-xs font-bold text-slate-800 mb-2">${item.meaning}</p>
+              <div class="p-2 rounded bg-white border border-amber-100 text-xs">
+                <span class="text-2xs text-slate-400 block">첫마디 공식:</span>
+                <span class="font-sc font-medium text-slate-900">${item.starter}</span>
+              </div>
+            </div>
+            <button onclick="speakChinese('${item.hanzi}')" class="mt-3 text-2xs text-indigo-600 hover:text-indigo-800 font-semibold flex items-center gap-1">
+              🔊 발음 듣기
+            </button>
+          `;
+          bookmarkedContainer.appendChild(card);
+        });
+      }
+
+      // Render Custom Words
+      document.getElementById('customWordsCount').innerText = `${customWords.length}개`;
+      if (customWords.length === 0) {
+        customContainer.innerHTML = `
+          <div class="col-span-full p-6 text-center text-xs text-slate-400 border border-dashed border-slate-200 rounded-xl bg-slate-50">
+            직접 등록한 단어가 없습니다. 우측 상단의 '+ 나만의 한자/어휘 추가' 버튼을 눌러 등록하세요.
+          </div>
+        `;
+      } else {
+        customWords.forEach((item, idx) => {
+          const card = document.createElement('div');
+          card.className = 'p-4 rounded-xl border border-slate-200 bg-white shadow-2xs flex flex-col justify-between';
+          card.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-sc font-extrabold text-2xl text-slate-900">${item.hanzi}</span>
+                <button onclick="deleteCustomWord(${idx})" class="text-slate-300 hover:text-rose-500 text-xs p-1" title="삭제">
+                  🗑️
+                </button>
+              </div>
+              ${item.pinyin ? `<p class="text-xs text-indigo-600 font-sc font-semibold mb-0.5">${item.pinyin}</p>` : ''}
+              <p class="text-xs font-bold text-slate-800 mb-2">${item.meaning}</p>
+              ${item.starter ? `
+                <div class="p-2 rounded bg-slate-50 border border-slate-100 text-xs">
+                  <span class="text-2xs text-slate-400 block">나만의 공식:</span>
+                  <span class="font-sc font-medium text-slate-900">${item.starter}</span>
+                </div>
+              ` : ''}
+            </div>
+            <button onclick="speakChinese('${item.hanzi}')" class="mt-3 text-2xs text-indigo-600 hover:text-indigo-800 font-semibold flex items-center gap-1">
+              🔊 발음 듣기
+            </button>
+          `;
+          customContainer.appendChild(card);
+        });
+      }
+    }
+
+    function openAddWordModal() {
+      document.getElementById('addWordModal').classList.remove('hidden');
+    }
+
+    function closeAddWordModal() {
+      document.getElementById('addWordModal').classList.add('hidden');
+      document.getElementById('customInputHanzi').value = '';
+      document.getElementById('customInputPinyin').value = '';
+      document.getElementById('customInputMeaning').value = '';
+      document.getElementById('customInputStarter').value = '';
+    }
+
+    function saveCustomWord() {
+      const hanzi = document.getElementById('customInputHanzi').value.trim();
+      const pinyin = document.getElementById('customInputPinyin').value.trim();
+      const meaning = document.getElementById('customInputMeaning').value.trim();
+      const starter = document.getElementById('customInputStarter').value.trim();
+
+      if (!hanzi || !meaning) {
+        showToast('한자와 뜻은 필수 입력 항목입니다.');
+        return;
+      }
+
+      customWords.unshift({ hanzi, pinyin, meaning, starter });
+      localStorage.setItem(LS_CUSTOM_WORDS, JSON.stringify(customWords));
+      closeAddWordModal();
+      renderSavedTab();
+      playTone(550, 0.1);
+      showToast('새로운 단어가 저장되었습니다.');
+    }
+
+    function deleteCustomWord(idx) {
+      customWords.splice(idx, 1);
+      localStorage.setItem(LS_CUSTOM_WORDS, JSON.stringify(customWords));
+      renderSavedTab();
+      showToast('단어가 삭제되었습니다.');
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('border-indigo-600', 'text-indigo-600', 'font-bold');
+        btn.classList.add('border-transparent', 'text-slate-600', 'font-medium');
+      });
+
+      document.getElementById(tabId).classList.remove('hidden');
+      const activeBtn = document.getElementById(`btn-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('border-indigo-600', 'text-indigo-600', 'font-bold');
+        activeBtn.classList.remove('border-transparent', 'text-slate-600', 'font-medium');
+      }
+
+      if (tabId === 'tab-part2') renderPart2List();
+      if (tabId === 'tab-part7') renderPart7Scripts();
+      if (tabId === 'tab-dict') renderDictCards();
+      if (tabId === 'tab-saved') renderSavedTab();
+    }
+
+    // App Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      initMockSelectOptions();
+      loadMockQuestion(0);
+      renderPart2List();
+      renderPart7Scripts();
+      renderDictCards();
+    });
+  </script>
+</body>
+</html>
